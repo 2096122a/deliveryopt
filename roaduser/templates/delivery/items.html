@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Items{% endblock %}
+
+{% block body_block %}
+
+
+        <h1>Item History</h1>
+<br><br><p> Below you can see your Pending, In Transit and completed requests</p>
+
+<ul class="nav nav-tabs" data-tabs="tabs">
+
+<li class="active"><a data-toggle="tab" href="#pending">Pending</a></li>
+ 
+<li><a data-toggle="tab" href="#intransit">In Transit</a></li>
+ 
+<li><a data-toggle="tab" href="#completed">Completed</a></li>
+ </ul>
+
+<div class ="tab-content">
+<div class="tab-pane active" id="pending">Pending Items<br>
+{% if items  %}
+<ul>
+          {%  for PostedItem in items  %}
+	{% if PostedItem.SenderName == user.username %}
+	{% if PostedItem.complete == "pending" %}
+                <li>{{PostedItem.itemName}}<br>
+		{{ PostedItem.dropOffAddress1 }}<br>
+		{{ PostedItem.date }}<br></li>
+		{% endif %}
+{% endif %}
+                {% endfor  %}
+            </ul>
+<strong>There are no further pending items.</strong>
+        {% else %}
+            <strong>There has been an error. Please contact support.</strong>
+        {% endif %}
+</div>
+
+<div class="tab-pane active" id="completed">Completed Items<br>
+{% if items  %}
+<ul>
+          {%  for PostedItem in items  %}
+	{% if PostedItem.SenderName == user.username %}
+	{% if PostedItem.complete == "complete" %}
+                <li>{{PostedItem.itemName}}<br>
+		{{ PostedItem.dropOffAddress1 }}<br>
+		{{ PostedItem.date }}<br></li>
+		{% endif %}
+{% endif %}
+                {% endfor  %}
+            </ul>
+<strong>There are no further completed items.</strong>
+        {% else %}
+            <strong>There has been an error. Please contact support.</strong>
+        {% endif %}
+</div>
+
+<div class="tab-pane active" id="intransit">In Transit Items<br>
+{% if items  %}
+<ul>
+          {%  for PostedItem in items  %}
+	{% if PostedItem.SenderName == user.username %}
+	{% if PostedItem.complete == "InTransit" %}
+                <li>{{PostedItem.itemName}}<br>
+		{{ PostedItem.dropOffAddress1 }}<br>
+		{{ PostedItem.date }}<br></li>
+		{% endif %}
+{% endif %}
+                {% endfor  %}
+            </ul>
+<strong>There are no items in transit.</strong>
+        {% else %}
+            <strong>There has been an error. Please contact support.</strong>
+        {% endif %}
+</div>
+
+</div>
+   
+    {% endblock %}

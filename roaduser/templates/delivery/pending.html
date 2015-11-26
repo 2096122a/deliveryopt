@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<body>
+
+Pending Items<br>
+{% if items.items  %}
+<ul>
+          {%  for PostedItem in items  %}
+	{% if PostedItem.SenderName == user.username %}
+	{% if PostedItem.complete == "pending" %}
+                <li>{{PostedItem.itemName}}<br>
+		{{ PostedItem.address1 }}<br></li>
+		{% endif %}
+{% endif %}
+                {% endfor  %}
+            </ul>
+        {% else %}
+            <strong>There are no pending items.</strong>
+        {% endif %}
+</body>

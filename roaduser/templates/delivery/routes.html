@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %} Routes{% endblock %}
+
+{% block body_block %}
+<h1> Below, you will see a record of your previous routes</h1>
+<div id="leftbox">
+
+
+
+        {% if routes %}
+
+<ul>
+
+          {%  for Route in routes %}
+
+		{% if Route.driverName == user.username %}
+            
+                <li>on {{ Route.date }}, you travelled from {{ Route.start }} to {{ Route.end }} </li>
+{% endif %}
+                {% endfor  %}
+            </ul>
+	You have no further previous routes to show.
+        {% else %}
+
+
+            <strong>There has been an error. Please contact support</strong>
+        {% endif %}
+</div>
+
+{% endblock %}

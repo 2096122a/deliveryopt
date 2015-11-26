@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %} Index{% endblock %}
+
+{% block body_block %}
+
+<h1>Delivery Optimiser</h1>
+<div id="text">
+{% if user.is_authenticated %}
+Welcome {{ user.username }}<br><br>
+Use the Post button to post items to be delivered. Our system will match your items with drivers and notify you when they are to be picked up and delivered.<br>
+<br>
+The History tab will keep track of all your delivered items
+{% else %}
+<p> <br>Welcome!<br><br>
+Delivery Optimiser is a new green way to handle deliveries. Sign up today to start shipping items for less.<br><br>
+Register as a driver to start making extra money on your journeys.</p>
+{% endif %}
+</div>
+<div id="image">
+        
+       <img src="{% static "images/scotlandmap.jpg" %}" alt="map of scotland" /> <!-- Images -->
+</div>
+{% endblock %}
